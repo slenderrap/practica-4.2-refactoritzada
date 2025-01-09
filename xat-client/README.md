@@ -21,7 +21,7 @@ npm install
 
 3. Crea un fitxer `.env` a l'arrel del projecte que apunti a la URL en la que s'executa Xat-API:
 ```bash
-API_URL=http://localhost:3000
+API_ENDPOINT=http://127.0.0.1:3000/api
 ```
 
 ## Execució
