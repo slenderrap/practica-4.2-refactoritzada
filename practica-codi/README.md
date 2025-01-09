@@ -20,10 +20,8 @@ npm install
 1. Inicia l'aplicació en mode desenvolupament:
 
 ```bash
-npm run ex1
 npm run ex2
 npm run ex3
-npm run ex4
 ```
 
 ## Crides d'exemple i documentació
