@@ -15,6 +15,8 @@ const DEFAULT_OLLAMA_MODEL = process.env.CHAT_API_OLLAMA_MODEL || 'llama3:latest
  */
 const listOllamaModels = async (req, res, next) => {
     try {
+        
+        
         logger.info('Sol·licitant llista de models a Ollama');
         const response = await axios.get(`${OLLAMA_API_URL}/tags`);
         
