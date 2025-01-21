@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Verificar que l'arxiu existeix
-IMAGE_PATH="../data/exemples/mario_128px.jpg"
+IMAGE_PATH="../../data/exemples/mario_128px.jpg"
 if [ ! -f "$IMAGE_PATH" ]; then
     echo "Error: La imatge no existeix a la ruta especificada"
     exit 1
