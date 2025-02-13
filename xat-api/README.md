@@ -33,7 +33,7 @@ MYSQL_PORT=3307
 
 # Ollama Server
 CHAT_API_OLLAMA_URL=http://127.0.0.1:11434/api
-CHAT_API_OLLAMA_MODEL=llama3:latest
+CHAT_API_OLLAMA_MODEL=llama3.2-vision:latest
 
 # Logging Configuration
 LOG_LEVEL=debug                        # error, warn, info, http, verbose, debug, silly
@@ -83,7 +83,7 @@ curl -X POST http://localhost:3000/api/chat/prompt \
   -H "Content-Type: application/json" \
   -d '{
     "prompt": "Hola, com estàs?",
-    "model": "llama3:latest"
+    "model": "llama3.2-vision:latest"
   }'
 ```
 
@@ -101,7 +101,7 @@ curl -X POST http://localhost:3000/api/chat/prompt \
   -d '{
     "conversationId": "UUID-DE-LA-CONVERSA",
     "prompt": "Segona pregunta",
-    "model": "llama3:latest"
+    "model": "llama3.2-vision:latest"
   }'
 ```
 
@@ -112,7 +112,7 @@ curl -X POST http://localhost:3000/api/chat/prompt \
   -H "Content-Type: application/json" \
   -d '{
     "prompt": "Explica'm un conte llarg",
-    "model": "llama3:latest",
+    "model": "llama3.2-vision:latest",
     "stream": true
   }'
 ```

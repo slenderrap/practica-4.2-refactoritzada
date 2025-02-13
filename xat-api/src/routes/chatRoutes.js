@@ -25,7 +25,7 @@ const { registerPrompt, getConversation, listOllamaModels } = require('../contro
  *               model:
  *                 type: string
  *                 description: Model d'Ollama a utilitzar
- *                 default: llama3:latest
+ *                 default: llama3.2-vision:latest
  *               stream:
  *                 type: boolean
  *                 description: Indica si la resposta ha de ser en streaming

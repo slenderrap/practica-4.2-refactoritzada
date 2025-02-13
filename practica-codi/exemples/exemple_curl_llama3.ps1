@@ -1,7 +1,7 @@
 try {
     # Crear el JSON amb el prompt i stream false
     $jsonBody = @{
-        model = "llama3:latest"
+        model = "llama3.2-vision:latest"
         prompt = "Analitza el sentiment d'aquest text (positiu, negatiu o neutral): 'M'encanta la nova pel·lícula, és fantàstica!'"
         stream = $false
     } | ConvertTo-Json -Compress

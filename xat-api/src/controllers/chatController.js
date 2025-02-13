@@ -6,8 +6,8 @@ const axios = require('axios');
 const { logger } = require('../config/logger');
 
 // Constants de configuració
-const OLLAMA_API_URL = process.env.CHAT_API_OLLAMA_URL || 'http://localhost:11434/api';
-const DEFAULT_OLLAMA_MODEL = process.env.CHAT_API_OLLAMA_MODEL || 'llama3:latest';
+const OLLAMA_API_URL = process.env.CHAT_API_OLLAMA_URL
+const DEFAULT_OLLAMA_MODEL = process.env.CHAT_API_OLLAMA_MODEL
 
 /**
  * Retorna la llista de models disponibles a Ollama
