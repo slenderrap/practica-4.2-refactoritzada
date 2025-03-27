@@ -2,7 +2,9 @@
 const csv = require('csv-parser');
 const fs = require('fs');
 const path = require('path');
-require('dotenv').config();
+const dotenv = require('dotenv');
+dotenv.config();
+console.log(dotenv.process)
 
 // Constants
 const DATA_SUBFOLDER = 'steamreviews';
@@ -96,23 +98,34 @@ async function main() {
 
         // Iterem pels jocs
         console.log('\n=== Llista de Jocs ===');
-        for (const game of games) {
+        const gamesAnalize = games.slice(0,2);
+        for (const game of gamesAnalize) {
             console.log(`Codi: ${game.appid}, Nom: ${game.name}`);
+            for (const review of reviews){
+                if (review.app_id === '10'){
+                    
+                console.log(`Codi review ${review.id},Codi app ${review.app_id}, valoracio ${review.is_positive}`);                
+}
+
+        
+        
+        
         }
+    }
 
         // Iterem per les primeres 10 reviews i analitzem el sentiment
         console.log('\n=== Anàlisi de Sentiment de Reviews ===');
-        const reviewsToAnalyze = reviews.slice(0, 2);
         
-        for (const review of reviewsToAnalyze) {
-            console.log(`\nProcessant review: ${review.id}`);
-            const sentiment = await analyzeSentiment(review.content);
-            console.log(`Review ID: ${review.id}`);
-            console.log(`Joc ID: ${review.app_id}`);
-            console.log(`Contingut: ${review.content.substring(0, 100)}...`);
-            console.log(`Sentiment (Ollama): ${sentiment}`);
-            console.log('------------------------');
-        }
+        
+        // for (const review of reviewsToAnalyze) {
+            // console.log(`\nProcessant review: ${review.id}`);
+            // const sentiment = await analyzeSentiment(review.content);
+            // console.log(`Review ID: ${review.id}`);
+            // console.log(`Joc ID: ${review.app_id}`);
+            // console.log(`Contingut: ${review.content.substring(0, 100)}...`);
+            // console.log(`Sentiment (Ollama): ${sentiment}`);
+        //     console.log('------------------------');
+        // }
         console.log(`\nNOMÉS AVALUEM LES DUES PRIMERES REVIEWS`);
      } catch (error) {
         console.error('Error durant l\'execució:', error.message);

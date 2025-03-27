@@ -6,7 +6,8 @@
 // Carregar variables d'entorn
 const dotenv = require('dotenv');
 dotenv.config();
-
+console.log("MYSQL_PORT:", process.env.MYSQL_PORT);
+console.log("MYSQL_HOST:", process.env.MYSQL_HOST);
 // Importacions principals
 const express = require('express');
 const cors = require('cors');
@@ -19,6 +20,7 @@ const { logger, expressLogger } = require('./src/config/logger');
 
 // Crear instància d'Express
 const app = express();
+
 
 /**
  * Configuració dels middlewares principals
