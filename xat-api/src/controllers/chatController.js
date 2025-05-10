@@ -378,9 +378,49 @@ const getConversation = async (req, res, next) => {
     }
 };
 
+/**
+ * Analitza el sentiment d'un text utilitzant Ollama
+ * @route POST /api/chat/sentiment-analysis
+ */
+const analyzeSentiment = async (req, res, next) => {
+    try{
+        const { text }= req.body
+        if (!text || typeof text !== "string"){
+            logger.warn("Intent de fer l'anàlisi de sentiment no té un text valid")
+            return res.status(400).json({message: 'El text introduït no presenta un format vàlid'})
+        }
+        logger.info('Sol·licitud d\'anàlisi de sentiment rebuda', { textLength: text.length });
+
+        //fem una consulta per ollama
+        const prompt = `Analyze the sentiment of this text and respond with only one word ("positive"/"negative"/"neutral"): "${text}"`;
+        //realitzem la petició i després la processem 
+        const ollamaResponse = await generateResponse(prompt);
+        console.log("ollama: "+ollamaResponse)
+        const sentiment = ollamaResponse.trim().toLowerCase();
+        let score = 0;
+
+        if (sentiment === 'positive') {
+            score = 1;
+        } else if (sentiment === 'negative') {
+            score = -1;
+        }
+        logger.info('Anàlisi de sentiment completada', { sentiment, score });
+        //enviem la resposta en format json
+        res.json({
+            result: sentiment,
+            score: score
+        });
+    }catch (error){
+        logger.error("S'ha produit un error durant l'anàlisi de sentiment",{error: error.message})
+        next(error)
+    }
+}
+
+
 // Exportació de les funcions públiques
 module.exports = {
     registerPrompt,
     getConversation,
-    listOllamaModels
+    listOllamaModels,
+    analyzeSentiment
 };

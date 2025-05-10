@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { registerPrompt, getConversation, listOllamaModels } = require('../controllers/chatController');
+const { registerPrompt, getConversation, listOllamaModels, analyzeSentiment } = require('../controllers/chatController');
 
 /**
  * @swagger
@@ -74,5 +74,47 @@ router.get('/conversation/:id', getConversation);
  *         description: Error al recuperar models
  */
 router.get('/models', listOllamaModels);
+
+/**
+ * @swagger
+ * /api/chat/sentiment-analysis:
+ *   post:
+ *     summary: Analitzar el sentiment d'un text
+ *     tags: [Sentiment Analysis]
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               text:
+ *                 type: string
+ *                 description: Text a analitzar
+ *             example:
+ *               text: "Estic molt content amb el servei!"
+ *     responses:
+ *       200:
+ *         description: Anàlisi de sentiment realitzada correctament
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 result:
+ *                   type: string
+ *                   description: Resultat de l'anàlisi (positive, negative, neutral)
+ *                 score:
+ *                   type: number
+ *                   description: Puntuació associada al sentiment
+ *             example:
+ *               result: positive
+ *               score: 1
+ *       400:
+ *         description: Dades invàlides
+ *       500:
+ *         description: Error intern del servidor
+ */
+router.post('/sentiment-analysis', analyzeSentiment);
 
 module.exports = router;
