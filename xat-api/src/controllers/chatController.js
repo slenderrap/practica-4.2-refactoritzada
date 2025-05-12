@@ -125,12 +125,9 @@ const generateResponse = async (prompt, options = {}) => {
         });
         
         if (error.response?.data) {
-            logger.error('Detalls de l\'error d\'Ollama', { 
-                details: error.response.data 
-            });
+            logger.error('Detalls de l\'error d\'Ollama', { details: error.response.data });
+            return `Error específic: ${error.response.data.message || 'Sense detalls addicionals'}`;
         }
-
-        return 'Ho sento, no he pogut generar una resposta en aquest moment.';
     }
 };
 

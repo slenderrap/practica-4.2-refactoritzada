@@ -211,7 +211,13 @@ async function sendPrompt(prompt) {
         });
 
         if (!response.ok) {
-            throw new Error(`Error HTTP: ${response.status}`);
+            if (response.status === 400) {
+                throw new Error("Error de validació: El format del missatge no és correcte.");
+            } else if (response.status === 500) {
+                throw new Error("Error intern del servidor. Si us plau, intenta-ho més tard.");
+            } else {
+                throw new Error(`Error inesperat (${response.status}).`);
+            }
         }
 
         if (useStream) {
@@ -239,10 +245,11 @@ async function sendPrompt(prompt) {
         console.error('Error en enviar el missatge:', error);
         if (lastMessageInfo) {
             lastMessageInfo.innerHTML = `
-                <span class="status error">Error en enviar</span>
+                <span class="status error">${error.message || "Error desconegut"}</span>
             `;
         }
-        addMessageToChat('No s\'ha pogut enviar el missatge. Comprova la connexió.', false);
+        // Mostrar un missatge més específic a l'usuari
+        addMessageToChat(error.message || "No s'ha pogut enviar el missatge. Si us plau, intenta-ho més tard.", false);
     }
 }
 
